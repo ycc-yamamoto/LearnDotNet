@@ -4,13 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp"
+        xmlns:i="clr-namespace:Microsoft.Xaml.Behaviors;assembly=Microsoft.Xaml.Behaviors"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance local:MainViewModel}"
+        d:DesignHeight="450"
+        d:DesignWidth="800"
+        FontFamily="Yu Gothic UI"
+        FontSize="16"
         Title="{Binding Path=Title, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
         Top="{Binding Path=Top, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         Left="{Binding Path=Left, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        Height="450"
-        Width="800">
+        Height="{Binding Path=Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        Width="{Binding Path=Width, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -18,6 +23,7 @@
         </Grid.ColumnDefinitions>
         
         <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
@@ -79,5 +85,15 @@
                  VerticalAlignment="Center"
                  HorizontalAlignment="Stretch"
                  Margin="10" />
+        
+        <Button Grid.Column="0"
+                Grid.Row="4"
+                Grid.ColumnSpan="2"
+                Content="初期化"
+                Command="{Binding Path=InitializeCommand, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Width="100"
+                Margin="10" />
     </Grid>
 </Window>

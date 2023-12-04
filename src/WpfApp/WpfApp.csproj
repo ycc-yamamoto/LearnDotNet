@@ -10,4 +10,8 @@
       <ProjectReference Include="..\LearningUtility\LearningUtility.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
+    </ItemGroup>
+
 </Project>
