@@ -19,6 +19,8 @@ public abstract class WindowsViewModelBase : ViewModelBase
     private double width;
     
     private double height;
+
+    private bool isBusy;
     
     protected WindowsViewModelBase(string title, double top, double left, double width, double height)
     {
@@ -62,6 +64,12 @@ public abstract class WindowsViewModelBase : ViewModelBase
     {
         get => this.height;
         set => this.SetField(ref this.height, value);
+    }
+    
+    public bool IsBusy
+    {
+        get => this.isBusy;
+        set => this.SetField(ref this.isBusy, value);
     }
     
     public DelegateCommand InitializeCommand { get; }

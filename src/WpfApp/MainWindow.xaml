@@ -16,6 +16,16 @@
         Left="{Binding Path=Left, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         Height="{Binding Path=Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         Width="{Binding Path=Width, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <local:DateTimeToStringConverter x:Key="DateTimeToStringConverter" />
+                    <local:BooleanReverseConverter x:Key="BooleanReverseConverter" />
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -28,72 +38,94 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         
+        <TextBlock Grid.Column="0"
+                   Grid.Row="0"
+                   Grid.ColumnSpan="2"
+                   Text="{Binding Path=CurrentTime, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DateTimeToStringConverter}}"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Margin="5" />
+        
         <Label Grid.Column="0"
-               Grid.Row="0"
+               Grid.Row="1"
                Content="ウィンドウ位置（Y）"
                VerticalAlignment="Center"
                HorizontalAlignment="Right"
                Margin="10" />
         
         <TextBlock Grid.Column="1"
-                   Grid.Row="0"
+                   Grid.Row="1"
                    Text="{Binding Path=Top, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Left"
                    Margin="10" />
         
         <Label Grid.Column="0"
-               Grid.Row="1"
+               Grid.Row="2"
                Content="ウィンドウ位置（X）"
                VerticalAlignment="Center"
                HorizontalAlignment="Right"
                Margin="10" />
         
         <TextBlock Grid.Column="1"
-                   Grid.Row="1"
+                   Grid.Row="2"
                    Text="{Binding Path=Left, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Left"
                    Margin="10" />
         
         <Label Grid.Column="0"
-               Grid.Row="2"
+               Grid.Row="3"
                Content="ウィンドウ位置（Y）を指定"
                VerticalAlignment="Center"
                HorizontalAlignment="Right"
                Margin="10" />
         
         <TextBox Grid.Column="1"
-                 Grid.Row="2"
+                 Grid.Row="3"
                  Text="{Binding Path=Top, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
                  VerticalAlignment="Center"
                  HorizontalAlignment="Stretch"
                  Margin="10" />
         
         <Label Grid.Column="0"
-               Grid.Row="3"
+               Grid.Row="4"
                Content="ウィンドウ位置（X）"
                VerticalAlignment="Center"
                HorizontalAlignment="Right"
                Margin="10" />
         
         <TextBox Grid.Column="1"
-                 Grid.Row="3"
+                 Grid.Row="4"
                  Text="{Binding Path=Left, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
                  VerticalAlignment="Center"
                  HorizontalAlignment="Stretch"
                  Margin="10" />
         
-        <Button Grid.Column="0"
-                Grid.Row="4"
-                Grid.ColumnSpan="2"
-                Content="初期化"
-                Command="{Binding Path=InitializeCommand, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                Width="100"
-                Margin="10" />
+        <StackPanel Grid.Column="0"
+                    Grid.Row="5"
+                    Grid.ColumnSpan="2"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+            
+            <Button Content="初期化"
+                    Command="{Binding Path=InitializeCommand, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Width="100"
+                    Margin="10" />
+            
+            <Button Content="{Binding Path=HeavyProcessButtonText, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                    Command="{Binding Path=HeavyProcessCommand, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                    IsEnabled="{Binding Path=IsBusy, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanReverseConverter}}"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Width="150"
+                    Margin="10" />
+        </StackPanel>
     </Grid>
 </Window>

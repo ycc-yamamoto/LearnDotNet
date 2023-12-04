@@ -1,4 +1,6 @@
-﻿namespace WpfApp;
+﻿using System;
+
+namespace WpfApp;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml
@@ -9,5 +11,15 @@ public partial class MainWindow
     {
         this.DataContext = new MainViewModel();
         this.InitializeComponent();
+    }
+
+    protected override void OnClosed(EventArgs e)
+    {
+        if (this.DataContext is IDisposable disposable)
+        {
+            disposable.Dispose();
+        }
+        
+        base.OnClosed(e);
     }
 }
